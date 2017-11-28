@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>BBDD</title>
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+    <script>
+    var id_antenna = 3;
+    var latitudeCenter = 40.46464800;
+    var longitudeCenter = -3.69094800;
+    var polygon = [];
+    var province = 28;
+
+    var distanciaX = 4;
+    var distanciaY = 4;
+    var constanteH = 8.993216E-6;
+    var yMax = longitudeCenter + (constanteH * (distanciaX * -1)) / Math.cos(latitudeCenter);
+    var yMin = longitudeCenter + (constanteH * distanciaX) / Math.cos(latitudeCenter);
+    var xMin = latitudeCenter + (constanteH * (distanciaY * -1));
+    var xMax = latitudeCenter + (constanteH * distanciaY);
+
+    var southWest = yMin + ' ' + xMin;
+    var northWest = yMin + ' ' + xMax;
+    var northEast = yMax + ' ' + xMax;
+    var southEast = yMax + ' ' + xMin;
+
+    polygon.push(southWest);
+    polygon.push(northWest);
+    polygon.push(northEast);
+    polygon.push(southEast);
+    polygon.push(southWest);
+
+    $.post("//localhost/3d_Map/Cesium_v2/api/insertAntenna", {
+        id_antenna: id_antenna,
+        latitudeCenter: latitudeCenter,
+        longitudeCenter: longitudeCenter,
+        polygon: polygon.toString(),
+        province: province
+    }).done(function(data) {
+        console.log(data);
+    });
+    </script>
+</body>
+
+</html>

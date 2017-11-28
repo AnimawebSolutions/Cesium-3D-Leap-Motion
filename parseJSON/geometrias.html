@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>BBDD</title>
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+    <script>
+    // ST_AsGeoJSON
+    // SELECT cartodb_id, ST_AsText(ST_Simplify(the_geom, 0.001)) as the_geom, altura FROM parcelasjaimemadrid WHERE altura > 0 AND constru NOT LIKE '%Z%' AND constru NOT LIKE '%P%' AND constru NOT LIKE '%S%' order by cartodb_id asc LIMIT 50000 OFFSET 0
+    // SELECT cartodb_id, ST_AsText(ST_Simplify(the_geom, 0.0001)) as the_geom FROM parcelasjaimemadrid order by cartodb_id asc LIMIT 50000 OFFSET 0
+    // SELECT cartodb_id, ST_AsText(ST_Simplify(the_geom, 0.00001)) as the_geom FROM parcelasjaimemadrid order by cartodb_id asc LIMIT 50000 OFFSET 0
+    // SELECT cartodb_id, ST_AsText(the_geom) as the_geom FROM parcelasjaimemadrid order by cartodb_id asc LIMIT 50000 OFFSET 0
+    $.getJSON("json/parcelasjaimemadrid.geojson", function(dataJSON) {
+        $.each(dataJSON.features, function(x, item) {
+            var cartodb_id = item.properties.cartodb_id;
+            var polygon = [];
+            var alturas = item.properties.altura;
+            var province = 28;
+
+            //console.log(item.geometry.coordinates[0]);
+            if (item.geometry.coordinates[0]) {
+                $.each(item.geometry.coordinates[0][0], function(y, item2) {
+                    polygon.push(item2[0] + ' ' + item2[1]);
+                });
+
+                $.post("//localhost/3d_Map/Cesium_v2/api/insertGeometry", {
+                    cartodb_id: cartodb_id,
+                    polygon: polygon.toString(),
+                    alturas: alturas,
+                    province: province
+                }).done(function(data) {
+                    console.log(data);
+                });
+            }
+        });
+    });
+    </script>
+</body>
+
+</html>
