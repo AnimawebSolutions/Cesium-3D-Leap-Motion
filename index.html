@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <title>Mobile World Congress - 2016</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div id="contenedorNavegacion">
+        <div id="cursorLeap">
+            <div id="touchLeap"></div>
+        </div>
+        <div id="menuCentral">
+            <div class="itemMenu" leapLink="exit"><img src="css/menu/exit.png" /></div>
+        </div>
+        <div id="contedorMenu"></div>
+    </div>
+    <div id="infoGraph">
+        <div id="chart_div">
+            <div class="title" data-bind="text: titleText">Activity connect</div>
+            <button type="button" id="closeInfoGraph" class="close">×</button>
+            <div id="chartConection" class="contentGraph" style="width: 1119px; height: 400px;"></div>
+            <div id="peopleAnalytics">
+                <img src="img/peopleAnalytics.png" />
+            </div>
+        </div>
+    </div>
+    <div id="cesiumContainer"></div>
+    <div id="loadingOverlay">
+        <h1>Loading...</h1>
+    </div>
+    <div id="toolbar"></div>
+    <!-- Jquery -->
+    <script type="text/javascript" src="ThirdParty/jquery/jquery-3.1.1.min.js"></script>
+    <!-- IncludeJS -->
+    <script type="text/javascript" src="ThirdParty/includejs/include-min.js"></script>
+    <!-- Cesium -->
+    <script type="text/javascript" src="Build/Cesium/Cesium.js"></script>
+    <!-- Stats Cesium -->
+    <script type="text/javascript" src="ThirdParty/stats/stats.min.js"></script>
+    <!-- Chroma color -->
+    <script type="text/javascript" src="ThirdParty/chroma/chroma.min.js"></script>
+    <!-- High Charts -->
+    <script type="text/javascript" src="ThirdParty/highcharts/highcharts.js"></script>
+    <!-- Jquery Collision -->
+    <script type="text/javascript" src="ThirdParty/jqueryCollision/jquery-collision.min.js"></script>
+    <!-- JS Common -->
+    <script type="text/javascript" src="common.js"></script>
+</body>
+
+</html>
